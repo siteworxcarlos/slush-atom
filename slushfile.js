@@ -76,7 +76,7 @@ gulp.task('default', function(done) {
             
             //update scss file
             gulp.src('../../source/css/*.scss')
-                .pipe(replace('//scaffold-add-mobile', '@import "scss/modules/'+answers.appName+'"\n //scaffold-add-mobile'))
+                .pipe(replace('//scaffold-add-mobile', '@import "scss/modules/'+answers.appName+';"\n //scaffold-add-mobile'))
                 .pipe(gulp.dest('../../source/css/'))
                 .pipe(install())
                 .on('end', function() {
