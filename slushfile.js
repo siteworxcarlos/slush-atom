@@ -55,7 +55,7 @@ gulp.task('default', function(done) {
                     file.basename = answers.appName;
                 }))
                 .pipe(conflict('./'))
-                .pipe(gulp.dest('../../source/_patterns/00-atoms/00-'+answers.appName))
+                .pipe(gulp.dest('../source/_patterns/00-atoms/00-'+answers.appName))
                 .pipe(install())
                 .on('end', function() {
                     done();
@@ -68,7 +68,7 @@ gulp.task('default', function(done) {
                     file.basename = '_'+answers.appName;
                 }))
                 .pipe(conflict('./'))
-                .pipe(gulp.dest('../../source/css/scss/modules/'+answers.appName))
+                .pipe(gulp.dest('../source/css/scss/modules/'+answers.appName))
                 .pipe(install())
                 .on('end', function() {
                     done();
@@ -76,8 +76,8 @@ gulp.task('default', function(done) {
             
             //update scss file
             gulp.src('../../source/css/*.scss')
-                .pipe(replace('//scaffold-add-mobile', '@import "scss/modules/'+answers.appName+';"\n //scaffold-add-mobile'))
-                .pipe(gulp.dest('../../source/css/'))
+                .pipe(replace('//scaffold-mobile', '@import "scss/modules/'+answers.appName+';"\n //scaffold-mobile'))
+                .pipe(gulp.dest('../source/css/'))
                 .pipe(install())
                 .on('end', function() {
                     done();
