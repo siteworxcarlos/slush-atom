@@ -38,7 +38,7 @@ var defaults = (function() {
     };
 })();
  
-gulp.task('default', function(done) {
+gulp.task('default', function (done) {
     var prompts = [{
         name: 'appName',
         message: 'What is the name of your atom?',
@@ -46,7 +46,7 @@ gulp.task('default', function(done) {
     }];
     //Ask
     inquirer.prompt(prompts,
-        function(answers) {
+        function (answers) {
             answers.appNameSlug = _.slugify(answers.appName);
             //output mustache file in project directory
             gulp.src(__dirname + '/templates/*.mustache')
@@ -60,12 +60,12 @@ gulp.task('default', function(done) {
                 .on('end', function() {
                     done();
                 });
-    
+
             //output scss file in project directory
-            gulp.src(__dirname + '/templates/*.scss')
+            gulp.src(__dirname + '/templates/app-sm.scss')
                 .pipe(template(answers))
                 .pipe(rename(function(file) {
-                    file.basename = '_'+answers.appName;
+                    file.basename = '_'+answers.appName + "-sm";
                 }))
                 .pipe(conflict('./'))
                 .pipe(gulp.dest('source/css/scss/modules/'+answers.appName))
@@ -73,6 +73,18 @@ gulp.task('default', function(done) {
                 .on('end', function() {
                     done();
                 });
+
+            gulp.src(__dirname + '/templates/app-lg.scss')
+                .pipe(template(answers))
+                .pipe(rename(function(file) {
+                    file.basename = '_'+answers.appName + "-lg";
+                }))
+                .pipe(conflict('./'))
+                .pipe(gulp.dest('source/css/scss/modules/'+answers.appName))
+                .pipe(install())
+                .on('end', function() {
+                    done();
+                }); 
             
             //update scss file
             gulp.src('../../source/css/*.scss')
