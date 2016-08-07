@@ -87,8 +87,9 @@ gulp.task('default', function (done) {
                 }); 
             
             //update scss file
-            gulp.src('../../source/css/*.scss')
-                .pipe(replace('//scaffold-mobile', '@import "scss/modules/'+answers.appName+';"\n //scaffold-mobile'))
+            gulp.src('source/css/*.scss')
+                .pipe(replace('//scaffold-mobile','@import "scss/modules/'+answers.appName+'/'+answers.appName+'-sm";\n//scaffold-mobile'))
+                .pipe(replace('//scaffold-desktop','@import "scss/modules/'+answers.appName+'/'+answers.appName+'-lg";\n//scaffold-desktop'))
                 .pipe(gulp.dest('source/css/'))
                 .pipe(install())
                 .on('end', function() {
