@@ -1,6 +1,6 @@
 # Slush Atom [![Build Status](https://secure.travis-ci.org/carlospicart/slush-atom.png?branch=master)](https://travis-ci.org/carlospicart/slush-atom) [![NPM version](https://badge-me.herokuapp.com/api/npm/slush-atom.png)](http://badges.enytc.com/for/npm/slush-atom)
 
-> Generator to scaffold an atom component in Pattern Lab
+> Generator to scaffold an atom and corresponding scss in Pattern Lab
 
 
 ## Getting Started
@@ -18,6 +18,9 @@ Create a new atom for your Pattern Lab:
 ```bash
 $ slush atom
 ```
+
+Include a `slush-atom-config.json` file in your project (use the one here as a template) where you run the `slush atom` command from to configure custom behavior.
+
 ## Getting To Know Slush
 
 Slush is a tool that uses Gulp for project scaffolding.

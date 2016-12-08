@@ -1,0 +1,22 @@
+{
+	"patternOutputPath": "source/_patterns/00-atoms/",
+	"scssFileOutputPath": "source/css/scss/modules/",
+	"scssNamespaceConnector": "-",
+	"scssFiles": [
+		{
+			"name": "sm",
+			"includedFromFile": "source/css/scss/_style.scss",
+			"scssImportPath": "scss/modules/",
+			"slushTemplate": true,
+			"template": "/templates/app-sm.scss",
+			"importReplace": "//scaffold-mobile"
+		},{
+			"name": "lg",
+			"includedFromFile": "source/css/scss/_style.scss",
+			"scssImportPath": "scss/modules/",
+			"slushTemplate": true,
+			"template": "/templates/app-lg.scss",
+			"importReplace": "//scaffold-desktop"
+		}
+	]
+}
