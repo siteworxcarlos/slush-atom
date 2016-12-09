@@ -1,5 +1,9 @@
 {
-	"patternOutputPath": "source/_patterns/00-atoms/",
+	"mustacheOutputPath": "source/_patterns/00-atoms/",
+	"mustacheFile": {
+		"slushTemplate": true,
+		"template": "/templates/app.mustache"
+	},
 	"scssFileOutputPath": "source/css/scss/modules/",
 	"scssNamespaceConnector": "-",
 	"scssFiles": [
