@@ -72,14 +72,16 @@ function haveAnswers() {
 gulp.task('createPattern', function(done) {
     if(!haveAnswers()) { return; }
 
+    var templatePath = (config.mustacheFile.slushTemplate ? __dirname : '') + config.mustacheFile.template;
+
     //output mustache file in project directory
-    return gulp.src(__dirname + '/templates/*.mustache')
+    return gulp.src(templatePath)
         .pipe(template(latestAnswers))
         .pipe(rename(function(file) {
             file.basename = latestAnswers.orderNumber + '-' + latestAnswers.appName;
         }))
         .pipe(conflict('./'))
-        .pipe(gulp.dest(config.patternOutputPath + latestAnswers.folder))
+        .pipe(gulp.dest(config.mustacheOutputPath + latestAnswers.folder))
         .pipe(install());
 });
 
