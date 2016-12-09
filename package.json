@@ -1,7 +1,7 @@
 {
   "name": "slush-atom",
   "description": "Generator to scaffold an atom component in Pattern Lab",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/siteworxcarlos/slush-atom",
   "author": {
     "name": "Carlos Picart",
