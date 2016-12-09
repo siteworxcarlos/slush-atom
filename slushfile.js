@@ -25,10 +25,10 @@ var gulp = require('gulp'),
         config = require(process.cwd() + '/slush-atom-config.json'); // Try to get local-to-project config file
     } catch(e) {
         // No local config file
+        console.warn("Using default config, exclusively", e);
     }
 
     var globalConfig = require('./slush-atom-config.json'); // Fall back to generic configs
-
     config = objectMerge(globalConfig, config);
 })();
 
