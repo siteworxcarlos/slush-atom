@@ -13,17 +13,24 @@ var gulp = require('gulp'),
     insert = require('gulp-insert'),
     rename = require('gulp-rename'),
     gulpif = require('gulp-if'),
+    objectMerge = require('object-merge'),
     _ = require('underscore.string'),
     inquirer = require('inquirer'),
     path = require('path'),
-    config = null,
+    config = {},
     latestAnswers = null;
 
-try {
-    config = require(process.cwd() + '/slush-atom-config.json'); // Try to get local-to-project config
-} catch(e) {
-    config = require('./slush-atom-config.json'); // Fall back to generic config
-}
+(function getConfig() {
+    try {
+        config = require(process.cwd() + '/slush-atom-config.json'); // Try to get local-to-project config file
+    } catch(e) {
+        // No local config file
+    }
+
+    var globalConfig = require('./slush-atom-config.json'); // Fall back to generic configs
+
+    config = objectMerge(globalConfig, config);
+})();
 
 gulp.task('refreshAnswers', function(done) {
     var prompts = [{
@@ -65,14 +72,16 @@ function haveAnswers() {
 gulp.task('createPattern', function(done) {
     if(!haveAnswers()) { return; }
 
+    var templatePath = (config.mustacheFile.slushTemplate ? __dirname : '') + config.mustacheFile.template;
+
     //output mustache file in project directory
-    return gulp.src(__dirname + '/templates/*.mustache')
+    return gulp.src(templatePath)
         .pipe(template(latestAnswers))
         .pipe(rename(function(file) {
             file.basename = latestAnswers.orderNumber + '-' + latestAnswers.appName;
         }))
         .pipe(conflict('./'))
-        .pipe(gulp.dest(config.patternOutputPath + latestAnswers.folder))
+        .pipe(gulp.dest(config.mustacheOutputPath + latestAnswers.folder))
         .pipe(install());
 });
 
