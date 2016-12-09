@@ -13,17 +13,24 @@ var gulp = require('gulp'),
     insert = require('gulp-insert'),
     rename = require('gulp-rename'),
     gulpif = require('gulp-if'),
+    objectMerge = require('object-merge'),
     _ = require('underscore.string'),
     inquirer = require('inquirer'),
     path = require('path'),
-    config = null,
+    config = {},
     latestAnswers = null;
 
-try {
-    config = require(process.cwd() + '/slush-atom-config.json'); // Try to get local-to-project config
-} catch(e) {
-    config = require('./slush-atom-config.json'); // Fall back to generic config
-}
+(function getConfig() {
+    try {
+        config = require(process.cwd() + '/slush-atom-config.json'); // Try to get local-to-project config file
+    } catch(e) {
+        // No local config file
+    }
+
+    var globalConfig = require('./slush-atom-config.json'); // Fall back to generic configs
+
+    config = objectMerge(globalConfig, config);
+})();
 
 gulp.task('refreshAnswers', function(done) {
     var prompts = [{
